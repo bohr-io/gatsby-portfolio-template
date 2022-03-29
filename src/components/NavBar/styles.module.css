@@ -1,0 +1,95 @@
+.nav-container {
+  position: fixed;
+  top: -100%;
+  width: 100%;
+  z-index: 10;
+}
+
+.nav-container.open {
+  background: linear-gradient(45deg, rgba(255,255,255,0.3), rgba(0,0,0,0.3));
+  backdrop-filter: blur(35px);
+  pointer-events: initial;
+  top: 0%
+}
+
+.nav-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  background: none;
+  border: none;
+  font-size: 0;
+}
+
+.nav-bar {
+  --hover-offset: 0px;
+  --hover-width: 100px;
+  --hover-opacity: 0;
+
+  opacity: 0;
+  pointer-events: none;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 75px;
+
+  margin: auto;
+  padding: 75px 0;
+}
+
+.nav-bar.open {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.nav-bar a {
+  text-decoration: none;
+  outline: none;
+}
+
+
+@media screen and (min-width: 920px) {
+  .nav-container {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.3), rgba(0,0,0,0.3));
+    backdrop-filter: blur(35px);
+    pointer-events: initial;
+  }
+
+  .nav-btn {
+    display: none;
+  }
+
+  .nav-bar {
+    opacity: 1;
+    pointer-events: initial;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 25px 0;
+    max-width: 920px;
+  }
+
+  .nav-bar::before {
+    content: '';
+    display: block;
+    opacity: var(--hover-opacity);
+
+    position: fixed;
+    left: 0;
+    z-index: -1;
+
+    box-sizing: content-box;
+    width: var(--hover-width);
+    height: 22px;
+    background: rgba(255, 4, 103, 0.4);
+    transform: translateX(var(--hover-offset));
+    box-shadow: 0 0 10px 10px rgba(255, 4, 103, 0.4);
+    border-radius: 8px;
+
+    transition: 200ms ease-in-out;
+    transition-property: transform, opacity, width;
+  }
+}
