@@ -31,14 +31,18 @@ const formatProjectsData = (data) => {
   }))
 }
 
+const isBrowser = () => typeof window !== 'undefined'
+const isDesktop = () => window.innerWidth >= 920
+
 const ProjectsDisplay = () => {
   const data = useStaticQuery(query)
   const projects = formatProjectsData(data)
   
-  const [isDesktopLayout, setIsDesktopLayout] = React.useState(window.innerWidth >= 920)
+  const [isDesktopLayout, setIsDesktopLayout] = React.useState(isBrowser() && isDesktop())
 
   React.useEffect(() => {
-    const handleResize = () => setIsDesktopLayout(window.innerWidth >= 920)
+    if (!isBrowser()) return
+    const handleResize = () => setIsDesktopLayout(isDesktop())
 
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)

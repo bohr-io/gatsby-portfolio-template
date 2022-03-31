@@ -74,7 +74,7 @@ const DesktopDisplay = ({ projects }) => {
 
       {isDetailing && <div className={styles.projectDetail}>
         <GatsbyImage image={detailedProject.image} alt={detailedProject.imageAlt} className={styles.detailedProjectImg} objectFit='scale-down' />
-        <div className={styles.projectDesc}>
+        <div>
           <Text tag='h3' variant='paragraph'>{detailedProject.name}</Text>
           <MDXRenderer>{detailedProject.desc}</MDXRenderer>
           <button
