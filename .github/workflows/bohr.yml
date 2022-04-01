@@ -44,7 +44,7 @@ jobs:
         env:
           DEPLOY_PATH: './'
           PUBLIC_PATH: './public'
-          SITE_NAME: 'gatsby-portfolio-template.bohr.io'
+          SITE_NAME: 'gatsby-portfolio-template'
           BRANCH: 'main'
           OWNER: 'bohr-io'
           REPOSITORY: 'gatsby-portfolio-template'
