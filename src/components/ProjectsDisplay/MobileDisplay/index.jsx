@@ -20,10 +20,26 @@ const MobileDisplay = ({ projects }) => {
     if (isLastProject) return
     setOnDisplayIndex((old) => old + 1)
   }
-  
+
+  const handleTouchStart = (e) => {
+    const startX = e.touches[0].screenX
+    const pageStartScrollY = window.scrollY
+    function handleTouchEnd (e) {
+      if (window.scrollY !== pageStartScrollY) return
+      if (e.changedTouches[0].screenX > startX) handlePrev();
+      if (e.changedTouches[0].screenX < startX) handleNext();
+    }
+
+    window.addEventListener('touchend', handleTouchEnd, { once: true })
+  }
+
   return (
     <div className={styles.projectsContainer}>
-      <ul className={styles.projectsList} style={{ '--on-display-index': onDisplayIndex }}>
+      <ul
+        className={styles.projectsList}
+        style={{ '--on-display-index': onDisplayIndex }}
+        onTouchStart={handleTouchStart}
+      >
         {projects.map(({ name, image, imageAlt, desc }) => (
           <li key={name}>
             <GatsbyImage image={image} alt={imageAlt} className={styles.projectImg} />
