@@ -34,7 +34,7 @@ const ContactLinks = () => {
   return (
     <div className={styles.contactLinksContainer}>
       {links.map(({ name, url, icon }) => (
-        <a href={url} key={name}>
+        <a href={url} key={name} target='_blank' rel='noreferrer'>
           <img src={icon} alt={`${name} icon`} />
         </a>
       ))}
