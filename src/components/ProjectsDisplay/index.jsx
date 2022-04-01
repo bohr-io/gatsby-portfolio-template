@@ -48,6 +48,7 @@ const ProjectsDisplay = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  if (!isBrowser()) return null
   if (isDesktopLayout) return <DesktopDisplay projects={projects} />
   else return <MobileDisplay projects={projects} />
 }
