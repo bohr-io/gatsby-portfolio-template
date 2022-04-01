@@ -6,28 +6,35 @@ import Text from '../../Text'
 import * as styles from './styles.module.css'
 
 const DesktopDisplay = ({ projects }) => {
-  const [projectsPage, setProjectsPage] = React.useState(0)
+  const [projectPage, setProjectPage] = React.useState(0)
   const [selectedProject, setSelectedProject] = React.useState(0)
   const [isDetailing, setIsDetailing] = React.useState(false)
   const detailedProject = projects[selectedProject]
-
-  const isFirstPage = projectsPage <= 0
-  const isLastPage = projectsPage >= (projects.length % 3 === 0 ?
+  const projectList = React.useRef(null)
+  
+  const isFirstPage = projectPage <= 0
+  const isLastPage = projectPage >= (projects.length % 3 === 0 ?
                                       Math.floor(projects.length / 3) - 1 :
                                       Math.floor(projects.length / 3))
 
-  const handlePrevPage = () => {
-    if (isFirstPage) return
-    setProjectsPage((old) => old - 1)
+  const handlePrevPage = () => setProjectPage((old) => old - 1)
+  const handleNextPage = () => setProjectPage((old) => old + 1)
+  const handleProjectFocus = (projectIndex) => {
+    projectList.current.scroll({ left: 960 * projectPage })
+    if (projectIndex % 3 === 0) setProjectPage(projectIndex / 3)
+    if (projectIndex % 3 === 2) setProjectPage((projectIndex - 2) / 3)
   }
   
-  const handleNextPage = () => {
-    if (isLastPage) return
-    setProjectsPage((old) => old + 1)
-  }
-  
-  const handleSelectProject = (index) => {
-    setSelectedProject(index)
+  React.useEffect(() => {
+    if (!projectList.current) return
+    projectList.current.scroll({
+      left: 960 * projectPage,
+      behavior: 'smooth'
+    })
+  }, [projectPage])
+
+  const handleSelectProject = (projectIndex) => {
+    setSelectedProject(projectIndex)
     setIsDetailing(true)
   }
 
@@ -35,12 +42,13 @@ const DesktopDisplay = ({ projects }) => {
 
   return (
     <div className={styles.projectsContainer}>
-      <div className={styles.projectsList} style={{ '--project-page': projectsPage }}>
-        {projects.map(({ name, image, imageAlt }, i) => (
+      <div className={styles.projectsList} ref={projectList}>
+        {projects.map(({id, name, image, imageAlt }, i) => (
           <button
-            key={name}
+            key={id}
             className={styles.selectionBtn}
             onClick={() => handleSelectProject(i)}
+            onFocus={(e) => handleProjectFocus(e, i)}
           >
             <GatsbyImage image={image} alt={imageAlt} className={styles.projectImg} />
             <Text
@@ -59,6 +67,7 @@ const DesktopDisplay = ({ projects }) => {
         disabled={isFirstPage}
         className={styles.prevBtn}
         aria-label='previous project'
+        tabIndex={-1}
       >
         <img src={arrowSvg} alt="" />
       </button>
@@ -68,6 +77,7 @@ const DesktopDisplay = ({ projects }) => {
         disabled={isLastPage}
         className={styles.nextBtn}
         aria-label='next project'
+        tabIndex={-1}
       >
         <img src={arrowSvg} alt="" />
       </button>   

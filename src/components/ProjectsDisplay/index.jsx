@@ -7,9 +7,11 @@ import MobileDisplay from './MobileDisplay'
 const query = graphql`{
   allMdx {
     nodes {
+      id
       body
       frontmatter {
         title
+        imageAlt
         image {
           childImageSharp {
             gatsbyImageData
@@ -24,6 +26,7 @@ const formatProjectsData = (data) => {
   const projectsData = data.allMdx.nodes
 
   return projectsData.map((project) => ({
+    id: project.id,
     name: project.frontmatter.title,
     image: getImage(project.frontmatter.image),
     imageAlt: project.frontmatter.imageAlt,
