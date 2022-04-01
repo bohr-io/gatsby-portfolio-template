@@ -8,7 +8,8 @@ import * as styles from './styles.module.css'
 const NavBar = () => {
   const [isOpen, setIsOpen] = React.useState(false)
   const [hoverEffectParams, setHoverEffectParams] = React.useState({
-    offset: 0,
+    positionX: 0,
+    opacity: 0,
     width: 0,
   });
 
@@ -18,10 +19,10 @@ const NavBar = () => {
 
   const handleLinkHover = (e) => {
     const width = e.target.offsetWidth
-    const offset = e.target.getBoundingClientRect().left;
+    const positionX = e.target.getBoundingClientRect().left
 
     setHoverEffectParams({
-      offset,
+      positionX,
       opacity: 1,
       width
     })
@@ -35,7 +36,7 @@ const NavBar = () => {
       <div
         className={clsx([styles.navBar, isOpen && styles.open])}
         style={{
-          '--hover-offset': `${hoverEffectParams.offset}px`,
+          '--hover-position-x': `${hoverEffectParams.positionX}px`,
           '--hover-opacity': hoverEffectParams.opacity,
           '--hover-width': `${hoverEffectParams.width}px`
         }}

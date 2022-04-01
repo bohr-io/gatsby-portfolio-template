@@ -1,6 +1,10 @@
 import { StaticImage } from 'gatsby-plugin-image'
+import 'normalize.css'
 import * as React from 'react'
 import skills from '../assets/skills.json'
+import programmingSkillsIcon from '../assets/svg/programming_skills_icon.svg'
+import projectsIcon from '../assets/svg/projects_icon.svg'
+import softwareSkillsIcon from '../assets/svg/software_skills_icon.svg'
 import ContactLinks from '../components/ContactLinks'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -10,9 +14,6 @@ import SkillsDisplay from '../components/SkillsDisplay'
 import Text from '../components/Text'
 import '../styles/global.css'
 import * as styles from '../styles/HomePage.module.css'
-import programmingSkillsIcon from '../assets/svg/programming_skills_icon.svg'
-import softwareSkillsIcon from '../assets/svg/software_skills_icon.svg'
-import projectsIcon from '../assets/svg/projects_icon.svg'
 
 const HomePage = () => {
   return (

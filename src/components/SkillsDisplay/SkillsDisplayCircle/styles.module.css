@@ -27,8 +27,8 @@
 }
 
 .item .progressBorder {
-  stroke-dasharray: 296;
-  stroke-dashoffset: calc(296 - calc(296 * var(--progress) / 100));
+  stroke-dasharray: 296px;
+  stroke-dashoffset: calc(296px - (296px * (var(--progress) / 100)));
   stroke: var(--secondary-color);
 }
 
