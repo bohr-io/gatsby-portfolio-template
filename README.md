@@ -15,7 +15,7 @@
 
     ```shell
     # create a new Gatsby site using the minimal starter
-    npm init gatsby
+    yarn init gatsby
     ```
 
 2.  **Start developing.**
@@ -24,7 +24,7 @@
 
     ```shell
     cd my-gatsby-site/
-    npm run develop
+    yarn run develop
     ```
 
 3.  **Open the code and start customizing!**
